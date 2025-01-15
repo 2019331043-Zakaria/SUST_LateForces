@@ -58,8 +58,6 @@ void print(BIGi x) {
     if (x > 9) print(x / 10);
     putchar(x % 10 + '0');
 }
-
-
 RandomNumGen:
 std::mt19937_64 rng(std::chrono::steady_clock::now().time_since_epoch().count());
 inline lli gen_random(lli l, lli r) {
@@ -67,24 +65,18 @@ inline lli gen_random(lli l, lli r) {
 }
 // shuffle(v.begin(), v.end(), rng);  // permuation, v = {1...n}
 // real number: double, uniform_real_dist
-
-
 submaskGen:
 for (int submask = mask; submask; submask = (submask-1)&mask) {
     for (int i = bit_lim; i >= 0; i--) {
         if (submask&(1<<i))  //
     }
 }
-
-
 cngJudgeStackSize:
 #include <sys/resource.h>
 #include <cerrno>
 struct rlimit rlim; 
 rlim.rlim_cur = 1073741824; // assign number of bytes you need
 setrlimit(RLIMIT_STACK, &rlim);
-
-
 incStackSize:
 static void run_with_stack_size(void (*func)(void), size_t stsize) {
     char *stack, *send;
@@ -101,4 +93,3 @@ static void run_with_stack_size(void (*func)(void), size_t stsize) {
     free(stack);
 }
 // inside main: run_with_stack_size(main_, 1024 * 1024 * 1024); // run with a 1 GiB stack
-
